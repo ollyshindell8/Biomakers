@@ -37,8 +37,8 @@ float tempA;
 float tempB;
 
 //Utility variables
-int safetyTemp = 30;                                    //Safety temperature for thermocouple next to heater to trigger shutoff
-float targetTemp = 27;                                  //Target temperature in Celcius
+//int safetyTemp = 30;                                    //Safety temperature for thermocouple next to heater to trigger shutoff
+//float targetTemp = 27;                                  //Target temperature in Celcius
 bool lightManual = 0;                                   //Switch between manual control of lights and automatic
 bool pumpsManual = 0;                                   //Switch between manual control of pumps and automatic
 bool airManual = 0;                                     //Switch between manual control of aeration and automatic
@@ -49,14 +49,14 @@ unsigned long DOInterval =  180000;                     //In milliseconds, time 
 unsigned long RGBTime = 30000;                          //Time elapsed tracker for color reading. Initialized time will be time of first reading
 unsigned long PHTime =  35000;                          //Time elapsed tracker for PH reading. Initialized time will be time of first reading
 unsigned long DOTime =  40000;                          //Time elapsed tracker for DO reading. Initialized time will be time of first reading
-unsigned long RGBShift = 0;                             //Shifted time for taking RGB readings
-unsigned long PHShift =  0;                             //Shifted time for taking PH readings
-unsigned long DOShift =  0;                             //Shifted time for taking DO readings
+unsigned long airDelay =  3000;                         //Time that aeration turns off before color reading
+unsigned long pumpDelay = 45000;                        //Time that pumps turn off before color reading
 unsigned long lightsOnTime =  60000;                    //In milliseconds, period for lights to remain on with automated control (14 hours is 50400000)
 unsigned long lightsOffTime = 60000;                    //In milliseconds, period for lights to remain off with automated control (10 hours is 36000000)
 bool startLightsOn = 1;                                 //Switch to 0 to start with the lights off
-unsigned long airDelay =  3000;                         //Time that aeration turns off before color reading
-unsigned long pumpDelay = 45000;                        //Time that pumps turn off before color reading
+unsigned long RGBShift = 0;                             //Shifted time for taking RGB readings
+unsigned long PHShift =  0;                             //Shifted time for taking PH readings
+unsigned long DOShift =  0;                             //Shifted time for taking DO readings
 
 void setup() {
   // put your setup code here, to run once:
