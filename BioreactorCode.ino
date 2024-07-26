@@ -1,7 +1,7 @@
 #include <Wire.h>          //enable I2C.
 #include "max6675.h"
 #include <Ezo_i2c_util.h>  //brings in common print statements
-#include <Ezo_i2c.h>       //include the EZO I2C library from https://github.com/Atlas-Scientific/Ezo_I2c_lib
+#include <Ezo_i2c.h>       //include the EZO I2C library from https://github.com/Atlas-Scientific/Ezo_I2c_lib (this link also includes the previous library)
 
 
 //Pins for thermocouples
