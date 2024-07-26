@@ -33,12 +33,13 @@ String inputString = " ";
 
 
 //Create global varaibles for data
-float tempA;
-float tempB;
+// float tempA;
+// float tempB;
 
 //Utility variables
-//int safetyTemp = 30;                                    //Safety temperature for thermocouple next to heater to trigger shutoff
-//float targetTemp = 27;                                  //Target temperature in Celcius
+// int safetyTemp = 30;                                    //Safety temperature for thermocouple next to heater to trigger shutoff
+// float targetTemp = 27;                                  //Target temperature in Celcius (decimals can be used for targetTemp, but not safetyTemp)
+// bool tempControl = 0;                                   //Boolean to enable or disable temperature control (should be left as zero because it can be changed with serial commands)
 bool lightManual = 0;                                   //Switch between manual control of lights and automatic
 bool pumpsManual = 0;                                   //Switch between manual control of pumps and automatic
 bool airManual = 0;                                     //Switch between manual control of aeration and automatic
@@ -95,15 +96,11 @@ void readDO() {
   Serial.println();
 }
 
-void readTemp() {
-  tempA = thermocoupleA.readCelsius();
-  // Serial.print("Temperature A: ");
-  // Serial.println(tempA);
-  delay(10);
-  tempB = thermocoupleB.readCelsius();
-  // Serial.print("Temperature B: ");
-  // Serial.println(tempB);
-}
+// void readTemp() {
+//   tempA = thermocoupleA.readCelsius();
+//   delay(10);
+//   tempB = thermocoupleB.readCelsius();
+// }
 
 
 void loop() {
@@ -184,11 +181,11 @@ void serialEvent() {                                                            
   received_from_computer = Serial.readBytesUntil(13, computerdata, 20);           //we read the data sent from the serial monitor(pc/mac/other) until we see a <CR>. We also count how many characters have been received.
   computerdata[received_from_computer] = 0;                                       //stop the buffer from transmitting leftovers or garbage
   inputString = String(computerdata);                                             //convert the serial input to a string
-  if(inputString.indexOf("temp") != -1){                                          //Input code required: tempXX.XX
-    targetTemp = inputString.substring(4,inputString.length()).toFloat();
-    Serial.print("New Temperature: ");
-    Serial.println(targetTemp);
-  }
+  // if(inputString.indexOf("temp") != -1){                                          //Input code required: tempXX.XX
+  //   targetTemp = inputString.substring(4,inputString.length()).toFloat();
+  //   Serial.print("New Temperature: ");
+  //   Serial.println(targetTemp);
+  // }
   else if(inputString.indexOf("rgbinterval") != -1){                              //Input code required: rgbintervalXXXXXXXX
     RGBInterval = inputString.substring(11,inputString.length()).toInt();
     Serial.print("New RGB Interval: ");
@@ -274,9 +271,11 @@ void serialEvent() {                                                            
         break;
       // case 16:  //Case: disable heating/cooling
       //   tempControl = 0;
+      //   Serial.println("Command 16 received");
       //   break;
       // case 17:  //Case: enable heating/cooling
       //   tempControl = 1;
+      //   Serial.println("Command 17 received");
       //   break;
     }
   }
